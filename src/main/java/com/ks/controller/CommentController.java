@@ -71,13 +71,13 @@ public class CommentController {
     }
 
     @GetMapping("/comments/count/{text}")
-    @ApiOperation(value="get user by commentId")
+    @ApiOperation(value="count how many times text occurred in comment body")
     @ApiResponses(value={
             @ApiResponse(code=200,message="OK"),
             @ApiResponse(code=500,message="Internal Server Error"),
-            @ApiResponse(code=404,message="Comments not found")
+            @ApiResponse(code=404,message="Not found")
     })
-    public Long getUserByCommentId(@PathVariable String text) {
+    public Long countTextInCommentBody(@PathVariable String text) {
 
         return commentService.getAllComments().stream().filter(comment -> comment.getBody().contains(text)).count();
 

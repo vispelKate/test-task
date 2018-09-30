@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,20 +28,20 @@ public class PostController {
             @ApiResponse(code=200,message="OK"),
             @ApiResponse(code=500,message="Internal Server Error")
     })
-    public List<Post> list(@PathVariable String title, Pageable pageable) {
-        return postService.list(title,pageable);
+    public List<Post> getPostsByTitle(@PathVariable String title, Pageable pageable) {
+        return postService.getPostsByTitle(title,pageable);
     }
 
     @DeleteMapping("/{postId}")
-    @ApiOperation(value="delete post")
+    @ApiOperation(value="delete getPost")
     @ApiResponses(value={
             @ApiResponse(code=200,message="Post deleted"),
             @ApiResponse(code=500,message="Internal Server Error"),
             @ApiResponse(code=404,message="Post not found")
     })
-    public ResponseEntity<?> deleteQuestion(@PathVariable Long postId) {
+    public ResponseEntity<?> deletePost(@PathVariable Long postId) {
 
-        return postService.post(postId).map(post -> {
+        return postService.getPost(postId).map(post -> {
             postService.delete(post);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + postId + " not found"));

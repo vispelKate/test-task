@@ -15,28 +15,16 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public Optional<Post> post(Long id) {
+    public Optional<Post> getPost(Long id) {
         return postRepository.findById(id);
     }
 
-    public List<Post> list() {
-        return postRepository.findAll();
-    }
-
-    public List<Post> list(String title, Pageable pageable) {
+    public List<Post> getPostsByTitle(String title, Pageable pageable) {
         return postRepository.findByTitle(title, pageable).getContent();
-    }
-
-    public boolean isExists(Long id) {
-        return postRepository.existsById(id);
     }
 
     public void delete(Post post) {
         postRepository.delete(post);
-    }
-
-    public Post save(Post post) {
-        return postRepository.save(post);
     }
 
     public void save(List<Post> posts) {

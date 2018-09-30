@@ -18,16 +18,8 @@ public class UserService {
         return (List) userRepository.findAll();
     }
 
-    public Optional<User> user(Long id) {
-        return userRepository.findById(id);
-    }
-
     public boolean isExists(Long id) {
         return userRepository.existsById(id);
-    }
-
-    public User save(User user) {
-        return userRepository.save(user);
     }
 
     public void save(List<User> users) {

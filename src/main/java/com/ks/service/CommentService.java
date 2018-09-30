@@ -30,9 +30,6 @@ public class CommentService {
         return commentRepository.findById(id);
     }
 
-    public boolean isExists(Long id) {
-        return commentRepository.existsById(id);
-    }
     public Page<Comment> getCommentByPostId(Long postId, Pageable pageable) {
         return commentRepository.findByPostId(postId,pageable);
     }
@@ -48,15 +45,9 @@ public class CommentService {
     }
 
 
-    public Comment save(Comment comment) {
-        return commentRepository.save(comment);
-    }
 
     public void save(List<Comment> comments) {
         commentRepository.saveAll(comments);
     }
 
-    public void delete(Comment comment) {
-        commentRepository.delete(comment);
-    }
 }
